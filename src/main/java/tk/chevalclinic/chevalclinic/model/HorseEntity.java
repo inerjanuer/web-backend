@@ -42,26 +42,26 @@ public class HorseEntity {
 	@Column(name="collection_days")
 	private String collectionDays;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(unique=true)
-	private TypeStatusEntity typeStatusEntity;
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(unique=false)
+//	private TypeStatusEntity typeStatusEntity;
+//	
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(unique=false)
+//	private ClientEntity clientEntity;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(unique=true)
-	private ClientEntity clientEntity;
-	
-	@OneToOne(mappedBy = "horseEntity")
-	private DailyWorkEntity dailyWorkEntity;
-	
-	@OneToMany(mappedBy = "horseEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<PreviusVaccinesEntity> previusVaccinesEntityList;
-	
-	@OneToMany(mappedBy = "horseMaleEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<ContractsEntity> ContractsMaleEntityList;
-	
-	@OneToMany(mappedBy = "horseFemaleEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<ContractsEntity> ContractsFemaleEntityList;
-	
+//	@OneToOne(mappedBy = "horseEntity")
+//	private DailyWorkEntity dailyWorkEntity;
+//	
+//	@OneToMany(mappedBy = "horseEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private List<PreviusVaccinesEntity> previusVaccinesEntityList;
+//	
+//	@OneToMany(mappedBy = "horseMaleEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private List<ContractsEntity> ContractsMaleEntityList;
+//	
+//	@OneToMany(mappedBy = "horseFemaleEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private List<ContractsEntity> ContractsFemaleEntityList;
+//	
 	public HorseEntity() {
 		
 	}

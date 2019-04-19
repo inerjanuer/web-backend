@@ -30,9 +30,9 @@ public class ClientEntity {
 	private String hatchery;
 	private String address;
 	private int telephone;
-	
-	@OneToOne(mappedBy = "clientEntity")
-	private HorseEntity horseEntity;
+//	
+//	@OneToOne(mappedBy = "clientEntity")
+//	private HorseEntity horseEntity;
 	
 	/*@OneToMany(mappedBy="client")
 	private Set<Reserva> reservas;

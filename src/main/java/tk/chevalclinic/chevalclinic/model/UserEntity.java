@@ -5,27 +5,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
-
 @Data
 @Entity
-@Table(name="type_status")
-public class TypeStatusEntity {
-
+@Table(name="user")
+public class UserEntity {
+	
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String status;
-	
-//	@OneToOne(mappedBy = "typeStatusEntity")
-//	private HorseEntity horseEntity;
-	
-	public TypeStatusEntity () {
-		
-	}
+	private String name;
+	private String email;
+	private String password;
+	private String rol;
+	private String typeUser;
 	
 }
