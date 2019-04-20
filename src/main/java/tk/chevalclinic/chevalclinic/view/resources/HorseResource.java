@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class HorseResource {
 	}
 	
 	@PostMapping
+	@CrossOrigin(origins = "http://localhost:4200")
 	@ApiOperation(value = "Crear Caballo", notes="Servicio para crear un nuevo caballo")
 	@ApiResponses(value = {@ApiResponse(code = 201, message = "Caballo creado correctamente"),
 			@ApiResponse(code=400, message="solicitud Invalida")})
@@ -55,6 +57,7 @@ public class HorseResource {
 	}
 	
 	@PutMapping("/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	@ApiOperation(value = "Actualizar Caballo", notes="Servicio para actualizar un nuevo caballo")
 	@ApiResponses(value = {@ApiResponse(code = 201, message = "Caballo actualizado correctamente"),
 			@ApiResponse(code=400, message="Caballo no Encontrado")})
@@ -81,6 +84,7 @@ public class HorseResource {
 	}
 	
 	@DeleteMapping("/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	@ApiOperation(value = "Eliminar caballo", notes="Servicio para eliminar un  caballo")
 	@ApiResponses(value = {@ApiResponse(code = 201, message = "Caballo eliminado correctamente"),
 			@ApiResponse(code=400, message="Caballo no Encontrado")})
@@ -92,6 +96,7 @@ public class HorseResource {
 	}
 	
 	@GetMapping
+	@CrossOrigin(origins = "http://localhost:4200")
 	@ApiOperation(value = "Listar Caballos", notes="Servicio para listar todos los caballos")
 	@ApiResponses(value = {@ApiResponse(code = 201, message = "Caballos encontrados correctamente"),
 			@ApiResponse(code=400, message="Caballos no Encontrados")})

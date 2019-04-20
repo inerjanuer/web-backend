@@ -34,6 +34,7 @@ public class ClientResource {
 	}
 	
 	@PostMapping
+	@CrossOrigin(origins = "http://localhost:4200")
 	@ApiOperation(value = "Crear Cliente", notes="Servicio para crear un nuevo cliente")
 	@ApiResponses(value = {@ApiResponse(code = 201, message = "Cliente creado correctamente"),
 			@ApiResponse(code=400, message="solicitud Invalida")})
@@ -49,6 +50,7 @@ public class ClientResource {
 	}
 	
 	@PutMapping("/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	@ApiOperation(value = "Actualizar Cliente", notes="Servicio para actualizar un nuevo cliente")
 	@ApiResponses(value = {@ApiResponse(code = 201, message = "Cliente actualizado correctamente"),
 			@ApiResponse(code=400, message="Cliente no Encontrado")})
@@ -68,6 +70,7 @@ public class ClientResource {
 	}
 	
 	@DeleteMapping("/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	@ApiOperation(value = "Eliminar Cliente", notes="Servicio para eliminar un nuevo cliente")
 	@ApiResponses(value = {@ApiResponse(code = 201, message = "Cliente eliminado correctamente"),
 			@ApiResponse(code=400, message="Cliente no Encontrado")})
