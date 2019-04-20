@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
@@ -25,6 +26,8 @@ import tk.chevalclinic.chevalclinic.view.resources.vo.HorseVO;
 @RestController
 @RequestMapping("/api/horse")
 @Api(tags = "horse")
+@CrossOrigin(origins = "http://localhost:4200", 
+methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE, RequestMethod.PUT})
 public class HorseResource {
 	
 	private final HorseService horseService;
@@ -51,8 +54,6 @@ public class HorseResource {
 		horse.setComments(horseVo.getComments());
 		horse.setImage(horseVo.getImage());
 		horse.setCollectionDays(horseVo.getCollectionDays());
-		//horse.setTypeStatusEntity(horse.getTypeStatusEntity());
-		//horse.setClientEntity(horse.getClientEntity());
 		return new ResponseEntity<>(this.horseService.create(horse), HttpStatus.CREATED);
 	}
 	
@@ -77,8 +78,6 @@ public class HorseResource {
 			horse.setComments(horseVo.getComments());
 			horse.setImage(horseVo.getImage());
 			horse.setCollectionDays(horseVo.getCollectionDays());
-			//horse.setTypeStatusEntity(horse.getTypeStatusEntity());
-			//horse.setClientEntity(horse.getClientEntity());
 		}
 		return new ResponseEntity<>(this.horseService.update(horse), HttpStatus.OK);
 	}

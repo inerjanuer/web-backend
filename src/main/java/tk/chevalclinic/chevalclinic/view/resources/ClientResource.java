@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
@@ -25,6 +26,8 @@ import tk.chevalclinic.chevalclinic.view.resources.vo.ClientVO;
 @RestController
 @RequestMapping("/api/client")
 @Api(tags = "client")
+@CrossOrigin(origins = "http://localhost:4200", 
+methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE, RequestMethod.PUT})
 public class ClientResource {
 
 	private final ClientService clientService;
@@ -76,7 +79,7 @@ public class ClientResource {
 			@ApiResponse(code=400, message="Cliente no Encontrado")})
 	public void deleteClient(@PathVariable("id") long id) {
 		ClientEntity client = this.clientService.findById(id);
-		if(client == null) {
+		if(client != null) {
 			this.clientService.delete(client);
 		}
 	}
@@ -90,4 +93,13 @@ public class ClientResource {
 	public ResponseEntity<List<ClientEntity>> findAll() {
 		return ResponseEntity.ok(this.clientService.findAll());
 	}
+	
+	@GetMapping("/{id}")
+	@ApiOperation(value = "Listar un Cliente", notes="Servicio para listar un solo cliente")
+	@ApiResponses(value = {@ApiResponse(code = 201, message = "Cliente  encontrado correctamente"),
+			@ApiResponse(code=400, message="Cliente no Encontrado")})
+	public ResponseEntity<ClientEntity> findById(@PathVariable("id") long id) {
+		return ResponseEntity.ok(this.clientService.findById(id));
+	}
+	
 }

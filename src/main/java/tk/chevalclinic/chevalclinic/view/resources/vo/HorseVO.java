@@ -19,8 +19,5 @@ public class HorseVO {
 	private String comments;
 	private String image;
 	private String collectionDays;
-	//private TypeStatusEntity typeStatusEntity;
-	//private ClientEntity clientEntity;
-	
 	
 }

@@ -1,18 +1,16 @@
 package tk.chevalclinic.chevalclinic.model;
 
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 
@@ -42,6 +40,7 @@ public class HorseEntity {
 	@Column(name="collection_days")
 	private String collectionDays;
 	
+<<<<<<< HEAD
 //	@OneToOne(cascade = CascadeType.ALL)
 //	@JoinColumn(unique=false)
 //	private TypeStatusEntity typeStatusEntity;
@@ -49,6 +48,19 @@ public class HorseEntity {
 //	@OneToOne(cascade = CascadeType.ALL)
 //	@JoinColumn(unique=false)
 //	private ClientEntity clientEntity;
+=======
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name="client_id", nullable =false)
+	private ClientEntity clientEntity;
+	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name="status_id", nullable =false)
+	private TypeStatusEntity typeStatusEntity;
+	
+
+>>>>>>> rama-iner
 	
 //	@OneToOne(mappedBy = "horseEntity")
 //	private DailyWorkEntity dailyWorkEntity;

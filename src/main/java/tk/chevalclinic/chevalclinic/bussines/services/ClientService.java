@@ -1,10 +1,8 @@
 package tk.chevalclinic.chevalclinic.bussines.services;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import tk.chevalclinic.chevalclinic.bussines.repository.ClientRepository;
 import tk.chevalclinic.chevalclinic.model.ClientEntity;
 
@@ -14,9 +12,9 @@ public class ClientService {
 	private final ClientRepository clientRepository;
 	
 	public ClientService(ClientRepository clientRepository) {
-		// TODO Auto-generated constructor stub
 		this.clientRepository = clientRepository;
 	}
+	
 	@Transactional
 	public ClientEntity create (ClientEntity client) {
 		return this.clientRepository.save(client);
@@ -38,8 +36,4 @@ public class ClientService {
 	public List<ClientEntity> findAll() {
 		return this.clientRepository.findAll();
 	}
-	
-	/*public Cliente finByNombre(String nombreCli) {
-		return this.clientRepository.finByNombre(nombreCli);
-	}*/
 }
