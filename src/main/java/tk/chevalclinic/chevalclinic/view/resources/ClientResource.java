@@ -77,7 +77,6 @@ public class ClientResource {
 	public void deleteClient(@PathVariable("id") long id) {
 		ClientEntity client = this.clientService.findById(id);
 		if(client != null) {
-			System.out.println(client);
 			this.clientService.delete(client);
 		}
 	}
@@ -89,4 +88,13 @@ public class ClientResource {
 	public ResponseEntity<List<ClientEntity>> findAll() {
 		return ResponseEntity.ok(this.clientService.findAll());
 	}
+	
+	@GetMapping("/{id}")
+	@ApiOperation(value = "Listar un Cliente", notes="Servicio para listar un solo cliente")
+	@ApiResponses(value = {@ApiResponse(code = 201, message = "Cliente  encontrado correctamente"),
+			@ApiResponse(code=400, message="Cliente no Encontrado")})
+	public ResponseEntity<ClientEntity> findById(@PathVariable("id") long id) {
+		return ResponseEntity.ok(this.clientService.findById(id));
+	}
+	
 }
