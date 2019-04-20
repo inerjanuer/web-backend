@@ -22,7 +22,7 @@ import tk.chevalclinic.chevalclinic.model.HorseEntity;
 import tk.chevalclinic.chevalclinic.view.resources.vo.HorseVO;
 
 @RestController
-@RequestMapping("/api/horse")
+@RequestMapping("/api/client/{id}/horse")
 @Api(tags = "horse")
 public class HorseResource {
 	

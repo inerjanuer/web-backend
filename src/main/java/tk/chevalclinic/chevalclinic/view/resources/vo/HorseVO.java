@@ -2,6 +2,8 @@ package tk.chevalclinic.chevalclinic.view.resources.vo;
 
 
 import lombok.Data;
+import tk.chevalclinic.chevalclinic.model.ClientEntity;
+import tk.chevalclinic.chevalclinic.model.TypeStatusEntity;
 
 
 @Data
@@ -19,8 +21,8 @@ public class HorseVO {
 	private String comments;
 	private String image;
 	private String collectionDays;
-	//private TypeStatusEntity typeStatusEntity;
-	//private ClientEntity clientEntity;
+	private TypeStatusEntity typeStatusEntity;
+	private ClientEntity clientEntity;
 	
 	
 }

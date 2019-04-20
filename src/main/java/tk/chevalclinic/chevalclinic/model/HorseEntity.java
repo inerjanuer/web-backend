@@ -1,16 +1,12 @@
 package tk.chevalclinic.chevalclinic.model;
 
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -43,24 +39,19 @@ public class HorseEntity {
 	private String collectionDays;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(unique=true)
-	private TypeStatusEntity typeStatusEntity;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(unique=true)
 	private ClientEntity clientEntity;
 	
-	@OneToOne(mappedBy = "horseEntity")
-	private DailyWorkEntity dailyWorkEntity;
+	@OneToOne(cascade = CascadeType.ALL)
+	private TypeStatusEntity typeStatusEntity;
 	
-	@OneToMany(mappedBy = "horseEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<PreviusVaccinesEntity> previusVaccinesEntityList;
-	
-	@OneToMany(mappedBy = "horseMaleEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<ContractsEntity> ContractsMaleEntityList;
-	
-	@OneToMany(mappedBy = "horseFemaleEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<ContractsEntity> ContractsFemaleEntityList;
+//	@OneToOne(mappedBy = "horseEntity")
+//	private DailyWorkEntity dailyWorkEntity;
+//	@OneToMany(mappedBy = "horseEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private List<PreviusVaccinesEntity> previusVaccinesEntityList;
+//	@OneToMany(mappedBy = "horseMaleEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private List<ContractsEntity> ContractsMaleEntityList;
+//	@OneToMany(mappedBy = "horseFemaleEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private List<ContractsEntity> ContractsFemaleEntityList;
 	
 	public HorseEntity() {
 		

@@ -20,9 +20,9 @@ public class TypeStatusEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String status;
-	
-	@OneToOne(mappedBy = "typeStatusEntity")
-	private HorseEntity horseEntity;
+//	
+//	@OneToOne(mappedBy = "typeStatusEntity")
+//	private HorseEntity horseEntity;
 	
 	public TypeStatusEntity () {
 		
