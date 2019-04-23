@@ -20,4 +20,5 @@ public class HorseVO {
 	private String image;
 	private String collectionDays;
 	
+	
 }

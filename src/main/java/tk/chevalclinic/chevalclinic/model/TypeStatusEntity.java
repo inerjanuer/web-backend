@@ -5,15 +5,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
@@ -23,14 +21,13 @@ import lombok.Data;
 public class TypeStatusEntity {
 
 	@Id
-	@Column(name="id")
+	@Column(name="id_status")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String status;
 	
-	@JsonManagedReference
-	@OneToMany(mappedBy="typeStatusEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@OrderBy("id DESC")
+	@JsonIgnoreProperties("typeStatusEntity")
+	@OneToMany(mappedBy="typeStatusEntity",  cascade = CascadeType.ALL)
 	private List<HorseEntity> horseEntityList;
 	
 	public TypeStatusEntity () {

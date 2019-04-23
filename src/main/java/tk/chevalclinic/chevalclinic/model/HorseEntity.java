@@ -1,16 +1,21 @@
 package tk.chevalclinic.chevalclinic.model;
 
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
@@ -20,7 +25,7 @@ import lombok.Data;
 public class HorseEntity {
 
 	@Id
-	@Column(name="id")
+	@Column(name="id_horse")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
@@ -40,15 +45,23 @@ public class HorseEntity {
 	@Column(name="collection_days")
 	private String collectionDays;
 	
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name="client_id", nullable =false)
+	@JsonIgnoreProperties("horseEntityList")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_client", nullable =true)
 	private ClientEntity clientEntity;
 	
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name="status_id", nullable =false)
+	@JsonIgnoreProperties("horseEntityList")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_status", nullable =true)
 	private TypeStatusEntity typeStatusEntity;
+	
+	@JsonIgnoreProperties("horseMaleEntity")
+	@OneToMany(mappedBy="horseMaleEntity", cascade = CascadeType.ALL)
+	private List<ContractsEntity> contractsMaleEntityList;
+	
+	@JsonIgnoreProperties("horseFemaleEntity")
+	@OneToMany(mappedBy="horseFemaleEntity", cascade = CascadeType.ALL)
+	private List<ContractsEntity> contractsFemaleEntityList;
 	
 
 	

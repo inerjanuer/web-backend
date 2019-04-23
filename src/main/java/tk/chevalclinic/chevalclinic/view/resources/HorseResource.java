@@ -60,7 +60,7 @@ public class HorseResource {
 	@ApiOperation(value = "Actualizar Caballo", notes="Servicio para actualizar un nuevo caballo")
 	@ApiResponses(value = {@ApiResponse(code = 201, message = "Caballo actualizado correctamente"),
 			@ApiResponse(code=400, message="Caballo no Encontrado")})
-	public ResponseEntity<HorseEntity> updateHorse(@PathVariable("id")int id,HorseVO horseVo) {
+	public ResponseEntity<HorseEntity> updateHorse(@PathVariable("id")long id,@RequestBody HorseVO horseVo) {
 		HorseEntity horse = this.horseService.findById(id);
 		if(horse == null) {
 			return new ResponseEntity<HorseEntity>(HttpStatus.NOT_FOUND);
@@ -86,7 +86,7 @@ public class HorseResource {
 			@ApiResponse(code=400, message="Caballo no Encontrado")})
 	public void removeHorse(@PathVariable("id") int id) {
 		HorseEntity horse = this.horseService.findById(id);
-		if(horse == null) {
+		if(horse != null) {
 			this.horseService.delete(horse);
 		}
 	}
@@ -97,6 +97,14 @@ public class HorseResource {
 			@ApiResponse(code=400, message="Caballos no Encontrados")})
 	public ResponseEntity<List<HorseEntity>> findAll() {
 		return ResponseEntity.ok(this.horseService.findAll());
+	}
+	
+	@GetMapping("/{id}")
+	@ApiOperation(value = "Listar un Caballo", notes="Servicio para listar un solo caballo")
+	@ApiResponses(value = {@ApiResponse(code = 201, message = "Caballo  encontrado correctamente"),
+			@ApiResponse(code=400, message="Caballo no Encontrado")})
+	public ResponseEntity<HorseEntity> findById(@PathVariable("id") long id) {
+		return ResponseEntity.ok(this.horseService.findById(id));
 	}
 
 }

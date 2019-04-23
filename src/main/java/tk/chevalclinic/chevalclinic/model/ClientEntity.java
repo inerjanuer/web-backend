@@ -6,15 +6,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
@@ -24,7 +22,7 @@ import lombok.Data;
 public class ClientEntity {
 	
 	@Id
-	@Column(name = "id")
+	@Column(name = "id_client")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String name;
@@ -34,9 +32,8 @@ public class ClientEntity {
 	private String address;
 	private int telephone;
 	
-	@JsonManagedReference
-	@OneToMany(mappedBy="clientEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@OrderBy("id DESC")
+	@JsonIgnoreProperties("clientEntity")
+	@OneToMany(mappedBy="clientEntity", cascade = CascadeType.ALL)
 	private List<HorseEntity> horseEntityList;
 	
 	public ClientEntity() {

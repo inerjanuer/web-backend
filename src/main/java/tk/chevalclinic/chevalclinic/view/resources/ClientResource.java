@@ -55,7 +55,7 @@ public class ClientResource {
 	@ApiOperation(value = "Actualizar Cliente", notes="Servicio para actualizar un nuevo cliente")
 	@ApiResponses(value = {@ApiResponse(code = 201, message = "Cliente actualizado correctamente"),
 			@ApiResponse(code=400, message="Cliente no Encontrado")})
-	public ResponseEntity<ClientEntity> updateCliente(@PathVariable("id") long id, ClientVO clientVo) {
+	public ResponseEntity<ClientEntity> updateCliente(@PathVariable("id") long id,@RequestBody ClientVO clientVo) {
 		ClientEntity client = this.clientService.findById(id);
 		if(client == null ) {
 			return new ResponseEntity<ClientEntity>(HttpStatus.NOT_FOUND);

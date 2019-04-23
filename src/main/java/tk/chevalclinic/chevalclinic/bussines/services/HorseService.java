@@ -33,7 +33,7 @@ public class HorseService {
 		this.horseRepository.delete(horse);
 	}
 	
-	public HorseEntity findById (int id) {
+	public HorseEntity findById (long id) {
 		return this.horseRepository.findById(id);
 	}
 	

@@ -13,4 +13,5 @@ public class ClientVO {
 	private String hatchery;
 	private String address;
 	private int telephone;
+	
 }
