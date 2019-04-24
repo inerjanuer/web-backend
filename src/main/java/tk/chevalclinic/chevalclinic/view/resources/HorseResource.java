@@ -19,8 +19,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import tk.chevalclinic.chevalclinic.bussines.services.ClientService;
 import tk.chevalclinic.chevalclinic.bussines.services.HorseService;
+import tk.chevalclinic.chevalclinic.bussines.services.TypeStatusService;
+import tk.chevalclinic.chevalclinic.model.ClientEntity;
 import tk.chevalclinic.chevalclinic.model.HorseEntity;
+import tk.chevalclinic.chevalclinic.model.TypeStatusEntity;
 import tk.chevalclinic.chevalclinic.view.resources.vo.HorseVO;
 
 @RestController
@@ -31,9 +35,13 @@ methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE, RequestMeth
 public class HorseResource {
 	
 	private final HorseService horseService;
+	private final ClientService clientService;
+	private final TypeStatusService typeStatusService;
 	
-	public HorseResource ( HorseService horseService) {
+	public HorseResource ( HorseService horseService, ClientService clientService, TypeStatusService typeStatusService) {
 		this.horseService = horseService;
+		this.clientService = clientService;
+		this.typeStatusService = typeStatusService;
 	}
 	
 	@PostMapping
@@ -53,7 +61,14 @@ public class HorseResource {
 		horse.setComments(horseVo.getComments());
 		horse.setImage(horseVo.getImage());
 		horse.setCollectionDays(horseVo.getCollectionDays());
-		return new ResponseEntity<>(this.horseService.create(horse), HttpStatus.CREATED);
+		ClientEntity client = this.clientService.findById(horseVo.getClient());
+		TypeStatusEntity typeStatus = this.typeStatusService.findById(horseVo.getTypeStatus());
+		if( client != null || typeStatus != null) {
+			horse.setClientEntity(client);
+			horse.setTypeStatusEntity(typeStatus);
+			return new ResponseEntity<>(this.horseService.create(horse), HttpStatus.CREATED);
+		}
+		return new ResponseEntity<HorseEntity>(HttpStatus.NOT_FOUND);
 	}
 	
 	@PutMapping("/{id}")
@@ -76,6 +91,13 @@ public class HorseResource {
 			horse.setComments(horseVo.getComments());
 			horse.setImage(horseVo.getImage());
 			horse.setCollectionDays(horseVo.getCollectionDays());
+			ClientEntity client = this.clientService.findById(horseVo.getClient());
+			TypeStatusEntity typeStatus = this.typeStatusService.findById(horseVo.getTypeStatus());
+			if( client == null || typeStatus == null) {
+				return new ResponseEntity<HorseEntity>(HttpStatus.NOT_FOUND);
+			}
+			horse.setClientEntity(client);
+			horse.setTypeStatusEntity(typeStatus);
 		}
 		return new ResponseEntity<>(this.horseService.update(horse), HttpStatus.OK);
 	}

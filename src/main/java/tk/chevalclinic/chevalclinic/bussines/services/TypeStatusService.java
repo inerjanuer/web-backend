@@ -17,6 +17,10 @@ public class TypeStatusService {
 		this.typeStatusRepository = typeStatusRepository;
 	}
 	
+	public TypeStatusEntity findById (long id) {
+		return this.typeStatusRepository.findById(id);
+	}
+	
 	public List<TypeStatusEntity> findAll() {
 		return this.typeStatusRepository.findAll();
 	}
