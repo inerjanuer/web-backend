@@ -55,6 +55,10 @@ public class HorseEntity {
 	@JoinColumn(name="id_status", nullable =true)
 	private TypeStatusEntity typeStatusEntity;
 	
+	@JsonIgnoreProperties("horseEntity")
+	@OneToMany(mappedBy="horseEntity", cascade = CascadeType.ALL)
+	private List<PreviusVaccinesEntity> previusVaccinesEntityHoList;
+	
 	@JsonIgnoreProperties("horseMaleEntity")
 	@OneToMany(mappedBy="horseMaleEntity", cascade = CascadeType.ALL)
 	private List<ContractsEntity> contractsMaleEntityList;

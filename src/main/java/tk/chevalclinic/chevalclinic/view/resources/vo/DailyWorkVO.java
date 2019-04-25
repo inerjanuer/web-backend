@@ -11,5 +11,6 @@ public class DailyWorkVO {
 	private String washeddat;
 	private String transfer;
 	private String pregnancyTest;
+	private long idHorse;
 	
 }

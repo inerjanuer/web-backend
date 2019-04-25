@@ -20,7 +20,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import tk.chevalclinic.chevalclinic.bussines.services.ContractsService;
+import tk.chevalclinic.chevalclinic.bussines.services.HorseService;
 import tk.chevalclinic.chevalclinic.model.ContractsEntity;
+import tk.chevalclinic.chevalclinic.model.HorseEntity;
 import tk.chevalclinic.chevalclinic.view.resources.vo.ContractsVO;
 
 @RestController
@@ -31,9 +33,12 @@ methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE, RequestMeth
 public class ContractsResource {
 	
 	private final ContractsService contractsService;
+	private final HorseService horseService;
+	private HorseEntity horse, horseFe;
 	
-	public ContractsResource( ContractsService contractsService ) {
+	public ContractsResource( ContractsService contractsService, HorseService horseService ) {
 		this.contractsService = contractsService;
+		this.horseService = horseService;
 	}
 	
 	@PostMapping
@@ -43,8 +48,13 @@ public class ContractsResource {
 	public ResponseEntity<ContractsEntity> createContracts(@RequestBody ContractsVO contractsVo) {
 		ContractsEntity contracts = new ContractsEntity();
 		contracts.setDatecreated(contractsVo.getDatecreated());
-		contracts.setHorseMaleEntity(contractsVo.getHorseMaleEntity());
-		contracts.setHorseFemaleEntity(contractsVo.getHorseFemaleEntity());
+		horse = this.horseService.findById(contractsVo.getIdMale());
+		horseFe = this.horseService.findById(contractsVo.getIdFemale());
+		if(horse == null || horseFe == null) {
+			return new ResponseEntity<ContractsEntity>(HttpStatus.NOT_FOUND);
+		}
+		contracts.setHorseMaleEntity(horse);
+		contracts.setHorseFemaleEntity(horseFe);
 		return new ResponseEntity<>(this.contractsService.create(contracts), HttpStatus.CREATED);
 	}
 	
@@ -58,8 +68,13 @@ public class ContractsResource {
 			return new ResponseEntity<ContractsEntity>(HttpStatus.NOT_FOUND);
 		} else {
 			contracts.setDatecreated(contractsVo.getDatecreated());
-			contracts.setHorseMaleEntity(contractsVo.getHorseMaleEntity());
-			contracts.setHorseFemaleEntity(contractsVo.getHorseFemaleEntity());
+			horse = this.horseService.findById(contractsVo.getIdMale());
+			horseFe = this.horseService.findById(contractsVo.getIdFemale());
+			if(horse == null || horseFe == null) {
+				return new ResponseEntity<ContractsEntity>(HttpStatus.NOT_FOUND);
+			}
+			contracts.setHorseMaleEntity(horse);
+			contracts.setHorseFemaleEntity(horseFe);
 		}
 		return new ResponseEntity<>(this.contractsService.update(contracts), HttpStatus.OK);
 	}

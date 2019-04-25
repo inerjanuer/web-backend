@@ -20,7 +20,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import tk.chevalclinic.chevalclinic.bussines.services.DailyWorkService;
+import tk.chevalclinic.chevalclinic.bussines.services.HorseService;
 import tk.chevalclinic.chevalclinic.model.DailyWorkEntity;
+import tk.chevalclinic.chevalclinic.model.HorseEntity;
 import tk.chevalclinic.chevalclinic.view.resources.vo.DailyWorkVO;
 
 @RestController
@@ -31,9 +33,11 @@ methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE, RequestMeth
 public class DailyWorkResource {
 	
 	private final DailyWorkService dailyWorkService;
+	private final HorseService horseService;
 	
-	public DailyWorkResource ( DailyWorkService dailyWorkService ) {
+	public DailyWorkResource ( DailyWorkService dailyWorkService, HorseService horseService ) {
 		this.dailyWorkService = dailyWorkService;
+		this.horseService = horseService;
 	}
 	
 	@PostMapping
@@ -47,6 +51,11 @@ public class DailyWorkResource {
 		dailyWork.setWasheddat(dailyWrokVo.getWasheddat());
 		dailyWork.setTransfer(dailyWrokVo.getTransfer());
 		dailyWork.setPregnancyTest(dailyWrokVo.getPregnancyTest());
+		HorseEntity horse = this.horseService.findById(dailyWrokVo.getIdHorse());
+		if(horse == null ) {
+			return new ResponseEntity<DailyWorkEntity>(HttpStatus.NOT_FOUND);
+		}
+		dailyWork.setHorseEntity(horse);
 		return new ResponseEntity<>(this.dailyWorkService.create(dailyWork),HttpStatus.CREATED);
 	}
 	
@@ -64,6 +73,11 @@ public class DailyWorkResource {
 			dailyWork.setWasheddat(dailyWrokVo.getWasheddat());
 			dailyWork.setTransfer(dailyWrokVo.getTransfer());
 			dailyWork.setPregnancyTest(dailyWrokVo.getPregnancyTest());
+			HorseEntity horse = this.horseService.findById(dailyWrokVo.getIdHorse());
+			if(horse == null ) {
+				return new ResponseEntity<DailyWorkEntity>(HttpStatus.NOT_FOUND);
+			}
+			dailyWork.setHorseEntity(horse);
 		}
 		return new ResponseEntity<>(this.dailyWorkService.update(dailyWork),HttpStatus.CREATED);
 	}
